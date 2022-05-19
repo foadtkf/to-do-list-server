@@ -31,6 +31,12 @@ async function run() {
         products = await cursor.toArray();
       res.send(products);
     });
+    // add products
+    app.post("/tasks", async (req, res) => {
+        const newTask = req.body;
+        const result = await  productCollection.insertOne(newTask);
+        res.send(result);
+      });
     app.delete("/tasks/:id", async (req, res) => {
         const id = req.params.id;
         const query = { _id: ObjectId(id) };
