@@ -56,6 +56,19 @@ async function run() {
         const result=await productCollection.updateOne(filter,updatedDoc,options)
         res.send(result)
       })
+      app.put('/tasksstat/:id',async(req,res)=>{
+        const id=req.params.id
+        const updatedProduct=req.body
+        const filter ={_id:ObjectId(id)}
+        const options = { upsert: true }
+        const updatedDoc={
+          $set:{
+            status: updatedProduct.status
+          }
+        }
+        const result=await productCollection.updateOne(filter,updatedDoc,options)
+        res.send(result)
+      })
 } finally {
 }
 }
